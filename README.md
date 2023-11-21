@@ -8,6 +8,9 @@ git clone https://github.com/DanSylvest/wanderer-client.git
 # 2. clone in this folder this
 git clone https://github.com/DanSylvest/wanderer-server.git
 
+# 3. clone here eve-route-builder
+git clone https://github.com/DanSylvest/eve-route-builder
+
 ```
 2. visit [developers](https://developers.eveonline.com/applications) site.
    1. make your own application

@@ -9,14 +9,20 @@ services:
       POSTGRES_DB: ${PG_DB_MAIN}
     ports:
       - ${PG_PORT}:5432
+  builder:
+    build: eve-route-builder
+    volumes:
+      - ./eve-route-builder:/usr/src/app
   server:
     depends_on:
       - db
+      - builder
     build: wanderer-server
     volumes:
       - ./wanderer-server:/usr/src/app
     environment:
       DATABASE_HOST: db
+      EVE_ROUTE_BUILDER_HOST: http://builder:2001
       POSTGRES_PASSWORD: ${PG_PWD}
       POSTGRES_USER: ${PG_USER}
       POSTGRES_DB: ${PG_DB_MAIN}
