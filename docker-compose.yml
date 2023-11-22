@@ -13,6 +13,8 @@ services:
     build: eve-route-builder
     volumes:
       - ./eve-route-builder:/usr/src/app
+    ports:
+      - ${BUILDER_DEBUG_PORT}:${BUILDER_DEBUG_PORT}
   server:
     depends_on:
       - db
