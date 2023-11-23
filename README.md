@@ -9,7 +9,7 @@ git clone https://github.com/DanSylvest/wanderer-client.git
 git clone https://github.com/DanSylvest/wanderer-server.git
 
 # 3. clone here eve-route-builder
-git clone https://github.com/DanSylvest/eve-route-builder
+git clone https://github.com/DanSylvest/eve-route-builder.git
 
 ```
 2. visit [developers](https://developers.eveonline.com/applications) site.
