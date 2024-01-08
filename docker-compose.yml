@@ -1,22 +1,22 @@
 version: "3"
 services:
-#  db:
-#    image: postgres:15-alpine3.17
-#    environment:
-#      # https://github.com/docker-library/docs/blob/master/postgres/README.md
-#      POSTGRES_PASSWORD: ${PG_PWD}
-#      POSTGRES_USER: ${PG_USER}
-#      POSTGRES_DB: ${PG_DB_MAIN}
-#    ports:
-#      - ${PG_PORT}:5432
-#  builder:
-#    build: eve-route-builder
-#    volumes:
-#      - ./eve-route-builder:/usr/src/app
-#    environment:
-#      PORT: ${EVE_ROUTE_BUILDER_PORT}
-#    ports:
-#      - ${BUILDER_DEBUG_PORT}:5000
+  db:
+    image: postgres:15-alpine3.17
+    environment:
+      # https://github.com/docker-library/docs/blob/master/postgres/README.md
+      POSTGRES_PASSWORD: ${PG_PWD}
+      POSTGRES_USER: ${PG_USER}
+      POSTGRES_DB: ${PG_DB_MAIN}
+    ports:
+      - ${PG_PORT}:5432
+  builder:
+    build: eve-route-builder
+    volumes:
+      - ./eve-route-builder:/usr/src/app
+    environment:
+      PORT: ${EVE_ROUTE_BUILDER_PORT}
+    ports:
+      - ${BUILDER_DEBUG_PORT}:5000
   zkbkills:
     build: zkb-kills-provider
     volumes:
@@ -25,48 +25,47 @@ services:
       PORT: ${ZKB_KILLS_PORT}
     ports:
       - ${ZKB_KILLS_DEBUG_PORT}:5000
-      - 2001:${ZKB_KILLS_PORT}
-#  server:
-#    depends_on:
-#      - db
-#      - builder
-#      - zkbkills
-#    build: wanderer-server
-#    volumes:
-#      - ./wanderer-server:/usr/src/app
-#    environment:
-#      DATABASE_HOST: db
-#      EVE_ROUTE_BUILDER_HOST: ${EVE_ROUTE_BUILDER_HOST}
-#      POSTGRES_PASSWORD: ${PG_PWD}
-#      POSTGRES_USER: ${PG_USER}
-#      POSTGRES_DB: ${PG_DB_MAIN}
-#      CN_PORT: ${CN_WS_PORT}
-#      CN_PROTO: ${CN_PROTO}
-#      CN_SSL_KEY: ${CN_SSL_KEY}
-#      CN_SSL_CERT: ${CN_SSL_CERT}
-#      PG_DB_MAIN: ${PG_DB_MAIN}
-#      PG_DB_CACHE: ${PG_DB_CACHE}
-#      PG_DB_EVE_STATIC_DATA: ${PG_DB_EVE_STATIC_DATA}
-#      PG_DB_DUMMY: ${PG_DB_DUMMY}
-#      EVE_CLIENT_KEY: ${EVE_CLIENT_ID}
-#      EVE_SECRET_KEY: ${EVE_SECRET_KEY}
-#    ports:
-#      - ${CN_WS_PORT}:${CN_WS_PORT}
-#      - ${SERVER_DEBUG_PORT}:${SERVER_DEBUG_PORT}
-#  client:
-#    depends_on:
-#      - db
-#      - server
-#    build: wanderer-client
-#    volumes:
-#      - ./wanderer-client:/usr/src/app
-#    environment:
-#      CN_WS_HOST: ${CN_WS_HOST}
-#      CN_WS_PORT: ${CN_WS_PORT}
-#      CN_WS_PROTO: ${CN_WS_PROTO}
-#      CN_SSL_KEY: ${CN_SSL_KEY}
-#      CN_SSL_CERT: ${CN_SSL_CERT}
-#      EVE_CLIENT_KEY: ${EVE_CLIENT_ID}
-#      SHOW_LOGGING: ${SHOW_LOGGING}
-#    ports:
-#      - "8080:8080"
+  server:
+    depends_on:
+      - db
+      - builder
+      - zkbkills
+    build: wanderer-server
+    volumes:
+      - ./wanderer-server:/usr/src/app
+    environment:
+      DATABASE_HOST: db
+      EVE_ROUTE_BUILDER_HOST: ${EVE_ROUTE_BUILDER_HOST}
+      POSTGRES_PASSWORD: ${PG_PWD}
+      POSTGRES_USER: ${PG_USER}
+      POSTGRES_DB: ${PG_DB_MAIN}
+      CN_PORT: ${CN_WS_PORT}
+      CN_PROTO: ${CN_PROTO}
+      CN_SSL_KEY: ${CN_SSL_KEY}
+      CN_SSL_CERT: ${CN_SSL_CERT}
+      PG_DB_MAIN: ${PG_DB_MAIN}
+      PG_DB_CACHE: ${PG_DB_CACHE}
+      PG_DB_EVE_STATIC_DATA: ${PG_DB_EVE_STATIC_DATA}
+      PG_DB_DUMMY: ${PG_DB_DUMMY}
+      EVE_CLIENT_KEY: ${EVE_CLIENT_ID}
+      EVE_SECRET_KEY: ${EVE_SECRET_KEY}
+    ports:
+      - ${CN_WS_PORT}:${CN_WS_PORT}
+      - ${SERVER_DEBUG_PORT}:${SERVER_DEBUG_PORT}
+  client:
+    depends_on:
+      - db
+      - server
+    build: wanderer-client
+    volumes:
+      - ./wanderer-client:/usr/src/app
+    environment:
+      CN_WS_HOST: ${CN_WS_HOST}
+      CN_WS_PORT: ${CN_WS_PORT}
+      CN_WS_PROTO: ${CN_WS_PROTO}
+      CN_SSL_KEY: ${CN_SSL_KEY}
+      CN_SSL_CERT: ${CN_SSL_CERT}
+      EVE_CLIENT_KEY: ${EVE_CLIENT_ID}
+      SHOW_LOGGING: ${SHOW_LOGGING}
+    ports:
+      - "8080:8080"
