@@ -11,6 +11,9 @@ git clone https://github.com/DanSylvest/wanderer-server.git
 # 3. clone here eve-route-builder
 git clone https://github.com/DanSylvest/eve-route-builder.git
 
+# 4. clone here zkb-kills-provider
+git clone https://github.com/DanSylvest/zkb-kills-provider.git
+
 ```
 2. visit [developers](https://developers.eveonline.com/applications) site.
    1. make your own application
